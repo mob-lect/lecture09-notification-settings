@@ -9,6 +9,9 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -59,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
-
-
+        
     }
 
     public void takePicture(View v) {
@@ -80,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
             ImageView imageView = (ImageView)findViewById(R.id.imgThumbnail);
             imageView.setImageBitmap(imageBitmap);
         }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void sendMessage(View v) {
@@ -93,6 +97,37 @@ public class MainActivity extends AppCompatActivity {
 
         smsManager.sendTextMessage("5554", null, "This is a test message!", pendingIntent, null);
 
+    }
+
+
+    public void notify(View v){
+        Log.v(TAG, "Notify button pressed");
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.menu_item_notify:
+                notify(null);
+                return true;
+            case R.id.menu_item_prefs:
+                Log.v(TAG, "Settings button pressed");
+                return true;
+            case R.id.menu_item_click:
+                Log.v(TAG, "Extra button pressed");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
