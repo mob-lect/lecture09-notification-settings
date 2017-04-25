@@ -1,4 +1,4 @@
-package edu.uw.intentdemo;
+package edu.uw.notsetdemo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
